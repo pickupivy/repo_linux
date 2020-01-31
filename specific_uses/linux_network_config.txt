@@ -1,0 +1,77 @@
+
+注释为#
+
+centOS 网络配置文件在：
+[root@localhost ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0
+TYPE=Ethernet       #网卡类型
+DEVICE=eth0         #网卡接口名称
+ONBOOT=yes          #系统启动时是否自动加载
+BOOTPROTO=static    #启用地址协议 --static:静态协议 --bootp协议 --dhcp协议
+IPADDR=192.168.1.11      #网卡IP地址
+NETMASK=255.255.255.0    #网卡网络地址
+GATEWAY=192.168.1.1      #网卡网关地址
+DNS1=10.203.104.41       #网卡DNS地址
+HWADDR=00:0C:29:13:5D:74 #网卡设备MAC地址
+BROADCAST=192.168.1.255  #网卡广播地址 
+
+设置完之后重启网络：
+/etc/init.d/network restart
+or
+service network restart
+
+Vmware 虚拟机的话，需要注意配置：
+1. 编辑->虚拟网络编辑器， 这个地方用于主机创建和配置单个或多个虚拟子网络， 配置每个子网络中：主机地址、连接模式、子网掩码、网关、DHCP？等；
+2. 每个虚拟机需要配置网络适配器， 决定该虚拟机要连接到主机的哪个子网络、以及跟主机的连接模式；
+
+如何设置 linux ssh 端口：
+SSH 为 Secure Shell, 由 IETF 的网络工作小组（Network Working Group）所制定；SSH 是建立在应用层和传输层基础上的一种安全协议。
+SSH传输数据是加密的，可以有效防止传输过程被截取数据保障安全。SSH的数据是经过压缩的，所以可以加快传输的速度。
+1.首先查看一下当前linux是否已经安装SSH软件包，使用 rpm -qa | grep ssh ;
+2.找到SSh服务配置文件路径一般都是在 /etc/ssh这个目录下面 sshd_config 这个文件；
+3.vim 编辑 sshd_config 文件， 找到被注释掉的 #Port 22 , 取消注释，即为开启 linux 默认的端口，编号为22；
+4.可以再重复添加 Port 字段新增自定义端口；
+5.设置好后重启 ssh 服务： /etc/init.d/sshd restart;
+6.如果还有问题，可尝试关闭防火墙： /etc/init.d/iptables stop;
+
+
+ubuntu 通过网络配置文件/etc/network/interfaces 配置网络。
+1、DHCP方式自动获取ip
+root@ubuntu:~# vi/etc/network/interfaces
+
+auto [网络设备名]                               
+iface [网络设备名] inet dhcp            #DHCP方式
+
+本机举例：
+
+root@ubuntu:~# vi /etc/network/interfaces
+auto enp4s0f0                               
+iface enp4s0f0 inet dhcp
+
+配置文件添加上面的内容保存退出。
+
+2、静态IP
+
+配置地址参数
+
+root@ubuntu:~# vi /etc/network/interface
+
+auto [网络设备名]
+iface [网络设备名] inet static         #静态IP地址方式
+address [ip地址]
+netmask [子网掩码]
+gateway [网关]
+
+ 
+
+本机举例：
+root@ubuntu:~# vi /etc/network/interface
+
+auto enp4s0f0
+iface enp4s0f0  inet static     
+address 192.168.2.100
+netmask 255.255.255.0
+gateway 192.168.2.1
+dns-nameservers  114.114.114.114              #根据实际情况配置相应的地址
+
+配置文件添加上面的内容保存退出。
+
