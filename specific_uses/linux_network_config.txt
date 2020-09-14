@@ -61,7 +61,6 @@ address [ip地址]
 netmask [子网掩码]
 gateway [网关]
 
- 
 
 本机举例：
 root@ubuntu:~# vi /etc/network/interface

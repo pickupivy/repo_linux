@@ -1,0 +1,24 @@
+
+ubuntu系统默认root用户是不能登录的，密码也是空的。
+如果要使用root用户登录，必须先为root用户设置密码
+打开终端，输入：sudo passwd root 然后按回车
+此时会提示你输入密码，在password:后输入你现在登录的用户的密码
+然后系统提示你输入新的UNIX密码
+Enter new UNIX password:这里输入你想为root设置的密码，要输入两次
+此时系统会出现密码设置成功的提示
+最后退出终端，重启计算机，选择用户进入系统的地方，选择其他
+然后输入root 再输入root的密码就可能登录了！
+
+
+
+在ubuntu系统中,默认是不开启ssh使用root用户登陆的,在/etc/ssh/sshd_config配置文件中如下配置:
+# Authentication:
+LoginGraceTime 120
+
+PermitRootLogin without-password
+StrictModes yes
+
+RSAAuthentication yes
+PubkeyAuthentication yes
+
+很多时候需要允许root用户登陆,需要将PermitRootLogin without-password修改为PermitRootLogin yes.然后重启ssh,sudo service ssh restart.这样就可以使用root用户登陆了

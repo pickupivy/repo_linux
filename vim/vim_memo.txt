@@ -1,0 +1,58 @@
+
+vim中复制拷贝当前单词到命令行中：<ctrl+r> + <ctrl+w>
+
+VIM安装TagList插件显示文件函数列表：
+分别将taglist目录下的doc和plugin中的文件拷贝到 ~/.vim目录下的doc和plugin中。
+在Vim命令行下运行”:Tlist”就可以打开Taglist窗口，再次运行”:Tlist”则关闭。
+Taglist: Exuberant ctags not found in PATH. Plugin is not loaded.
+使用 apt-get install exuberant-ctags; 即可。
+
+自定义快捷键相关的六种模式
+在Vim中，共有六种模式，不同的定义快捷键的命令生效的模式不同，这六种模式如下：
+
+N ormal Mode: 即Vim的普通模式，我们打开Vim后进入的第一个模式即此模式。
+V isual Mode: 即Vim的Visual模式，我们在选中了一定的文本之后(通过v或者V命令)即进入此模式。
+S elect Mode: 这种模式和Visual模式相似，不过输入的文本都会替换选中的文本。 在普通模式下，通过鼠标选中或者使用gH命令都可以进入此模式。
+O perator-pending Mode: 当我们输入一个操作符后(例如，d，y，c等等)，就会进入此模式。
+I nsert Mode: 即Vim的插入模式，普通模式下我们输入i(或者s,a等等)就会进入此模式。
+C ommand-line Mode: 命令行模式，我们在普通模式下输入:或者/等就会进入此模式。
+
+
+键表
+<k0> - <k9> 小键盘 0 到 9 
+<S-...> Shift＋键 
+<C-...> Control＋键 
+<M-...> Alt＋键 或 meta＋键 
+<A-...> 同 <M-...> 
+<Esc> Escape 键 
+<Up> 光标上移键 
+<Space> 插入空格 
+<Tab> 插入Tab 
+<CR> 等于<Enter>
+
+map系命令	noremap系命令	unmap系命令	mapclear系命令	生效模式
+:map		:noremap		:unmap		:mapc[lear]		Normal, Visual, Select, Operator-pending
+:nmap		:nnoremap		:nunmap		:nmapc[lear]	Normal
+:vmap		:vnoremap		:vunmap		:vmapc[lear]	Visual and Select
+:smap		:snoremap		:sunmap		:smapc[lear]	Select
+:xmap		:xnoremap		:xunmap		:xmapc[lear]	Visual
+:omap		:onoremap		:ounmap		:omapc[lear]	Operator-pending
+:map!		:noremap!		:unmap!		:mapc[lear]!	Insert and Command-line
+:imap		:inoremap		:iunmap		:imapc[lear]	Insert
+:lmap		:lnoremap		:lunmap		:lmapc[lear]	Insert, Command-line, Lang-Arg
+:cmap		:cnoremap		:cunmap		:cmapc[lear]	Command-line
+
+nore 表示非递归。 
+递归的映射其实很好理解，也就是如果键a被映射成了b，c又被映射成了a，如果映射是递归的，那么c就被映射成了b。
+
+开启鼠标模式
+:set mouse=x, x取值如下, 例如:set mouse=a, 开启所有模式的mouse支持
+n 普通模式
+v 可视模式
+i 插入模式
+c 命令行模式
+h 在帮助文件里，以上所有的模式
+a 以上所有的模式
+r 跳过 |hit-enter| 提示
+A 在可视模式下自动选择
+关闭鼠标模式:set mouse=v, 默认即为v
